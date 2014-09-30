@@ -16,7 +16,6 @@ import static org.mockito.Mockito.verify;
  * Created by alisonpolton-simon on 9/30/14.
  */
 public class LibraryTestDrive {
-    //Set-up
     PrintStream printStream;
     Library library;
     List<String> books;
@@ -29,28 +28,22 @@ public class LibraryTestDrive {
 
     @Test
     public void shouldListOneBookWhenLibraryContainsOneBook() {
-        //Arrange
         books.add("Agile Samurai");
         library = new Library(printStream, books);
 
-        //Action
         library.listBooks();
 
-        //Assert
         verify(printStream).println("Agile Samurai");
     }
 
     @Test
     public void shouldListTwoBooksWhenLibraryContainsTwoBooks() {
-        //Arrange
         books.add("Agile Samurai");
         books.add("Clean Code");
         library = new Library(printStream, books);
 
-        //Action
         library.listBooks();
 
-        //Assert
         verify(printStream).println("Agile Samurai");
         verify(printStream).println("Clean Code");
     }
