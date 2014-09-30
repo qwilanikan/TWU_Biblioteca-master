@@ -1,56 +1,58 @@
 package com.twu.biblioteca;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by alisonpolton-simon on 9/30/14.
  */
 public class LibraryTestDrive {
+    //Set-up
+    PrintStream printStream;
+    Library library;
+    List<String> books;
 
-    @Test
-    public void shouldPrintEmptyListWhenLibraryIsEmpty() {
-        //Arrange
-        String books = new String();
-        Library library = new Library(books);
-
-        //Action
-        String result = library.listBooks();
-
-        //Assert
-        assertEquals(result, "");
-
+    @Before
+    public void setUp(){
+        printStream = mock(PrintStream.class);
+        books = new ArrayList<String>();
     }
 
     @Test
-    public void shouldPrintOneBookWhenLibraryHasOneBook() {
+    public void shouldListOneBookWhenLibraryContainsOneBook() {
         //Arrange
-        String books = "Agile Samurai";
-        Library library = new Library(books);
+        books.add("Agile Samurai");
+        library = new Library(printStream, books);
 
         //Action
-        String result = library.listBooks();
+        library.listBooks();
 
         //Assert
-        assertEquals(result, "Agile Samurai");
-
+        verify(printStream).println("Agile Samurai");
     }
+
     @Test
-    public void shouldPrintTwoBooksWhenLibraryHasTwoBooks() {
+    public void shouldListTwoBooksWhenLibraryContainsTwoBooks() {
         //Arrange
-        String books = "Agile Samurai, Hunger Games";
-        Library library = new Library(books);
+        books.add("Agile Samurai");
+        books.add("Clean Code");
+        library = new Library(printStream, books);
 
         //Action
-        String result = library.listBooks();
+        library.listBooks();
 
         //Assert
-        assertEquals(result, "Agile Samurai, Hunger Games");
-
+        verify(printStream).println("Agile Samurai");
+        verify(printStream).println("Clean Code");
     }
 
 
