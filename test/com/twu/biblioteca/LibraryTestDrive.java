@@ -39,6 +39,19 @@ public class LibraryTestDrive {
         assertEquals(result, "Agile Samurai");
 
     }
+    @Test
+    public void shouldPrintTwoBooksWhenLibraryHasTwoBooks() {
+        //Arrange
+        String books = "Agile Samurai, Hunger Games";
+        Library library = new Library(books);
+
+        //Action
+        String result = library.listBooks();
+
+        //Assert
+        assertEquals(result, "Agile Samurai, Hunger Games");
+
+    }
 
 
 }
