@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
-import java.awt.print.Book;
+import com.javafx.tools.doclets.formats.html.SourceToHTMLConverter;
+
 import java.io.PrintStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class BibliotecaApp {
         Library library = new Library(System.out, bookListBuilder.setUpBooks());
         library.listBooks();
 
+        Book book = new Book("title","author","year");
+        System.out.println(book.toString());
     }
 
 
