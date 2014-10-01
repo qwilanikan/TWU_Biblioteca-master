@@ -10,7 +10,6 @@ import java.util.List;
 public class BibliotecaApp {
 
     public static void main(String[] args) {
-
         MessagePrinter printer = new MessagePrinter(System.out);
         printer.printWelcome();
 
