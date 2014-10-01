@@ -10,9 +10,15 @@ import java.util.List;
 public class BibliotecaApp {
 
     public static void main(String[] args) {
+
+        MessagePrinter printer = new MessagePrinter(System.out);
+        printer.printWelcome();
+
         BookListBuilder bookListBuilder = new BookListBuilder();
+
         Library library = new Library(System.out, bookListBuilder.setUpBooks());
         library.listBooks();
+
     }
 
 
