@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-import junit.framework.TestCase;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,6 +21,14 @@ public class BookTest {
 
         assertThat(result, is(String.format("%-40s %-20s %-4s", "The Cat in the Hat", "Dr. Seuss", "1950")));
     }
+
+    @Test
+    public void shouldReturnTitleWhenOnlyTitleIsGiven(){
+        Book book = new Book("Book", "", "");
+        String result = book.toString();
+        assertThat(result, is(String.format("%-40s %-20s %-4s", "Book", "", "")));
+    }
+
 
 
 }

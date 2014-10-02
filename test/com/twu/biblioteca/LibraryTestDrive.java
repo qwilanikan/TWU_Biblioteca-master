@@ -48,4 +48,16 @@ public class LibraryTestDrive {
         verify(printStream).println("Clean Code");
     }
 
+    @Test
+    public void shouldFooWhenBoo() {
+        books.add("Agile Samurai");
+        books.add("Clean Code");
+        library = new Library(printStream, books);
+
+        library.listBooks();
+
+        verify(printStream).println("Agile Samurai");
+        verify(printStream).println("Clean Code");
+    }
+
 }

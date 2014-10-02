@@ -1,11 +1,8 @@
 package com.twu.biblioteca;
 
-import com.javafx.tools.doclets.formats.html.SourceToHTMLConverter;
 
-import java.io.PrintStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.List;
 
 public class BibliotecaApp {
