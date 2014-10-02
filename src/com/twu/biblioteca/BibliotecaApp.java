@@ -19,7 +19,7 @@ public class BibliotecaApp {
         Library library = new Library(System.out, bookListBuilder.setUpBooks());
         library.listBooks();
 
-        Book book = new Book("title","author","year");
+        Book book = new Book("Title","author","year");
         System.out.println(book.toString());
     }
 
