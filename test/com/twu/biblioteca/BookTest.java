@@ -12,14 +12,14 @@ public class BookTest {
 
     @Before
     public void setUp(){
-        book = new Book("title", "author", "year");
+        book = new Book("The Cat in the Hat", "Dr. Seuss", "1950");
     }
 
     @Test
-    public void shouldPrintTitleAuthorYear(){
+    public void shouldReturnTitleAuthorYear(){
         String result = book.toString();
 
-        assertThat(result, is(String.format("%-40s %-20s %-4s", "title", "author", "year")));
+        assertThat(result, is(String.format("%-40s %-20s %-4s", "The Cat in the Hat", "Dr. Seuss", "1950")));
     }
 
 

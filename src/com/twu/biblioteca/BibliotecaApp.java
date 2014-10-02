@@ -14,9 +14,12 @@ public class BibliotecaApp {
         MessagePrinter printer = new MessagePrinter(System.out);
         printer.printWelcome();
 
-        BookListBuilder bookListBuilder = new BookListBuilder();
+        List<String> books = new ArrayList<String>();
+        books.add("Clean Code");
+        books.add("Agile Samurai");
+        books.add("Joy of Cooking");
 
-        Library library = new Library(System.out, bookListBuilder.setUpBooks());
+        Library library = new Library(System.out, books);
         library.listBooks();
 
         Book book = new Book("Title","author","year");
