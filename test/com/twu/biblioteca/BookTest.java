@@ -17,7 +17,7 @@ public class BookTest {
 
     @Test
     public void shouldReturnTitleAuthorYear(){
-        String result = book.toString();
+        String result = book.getFormattedDetails();
 
         assertThat(result, is(String.format("%-40s %-20s %-4s", "The Cat in the Hat", "Dr. Seuss", "1950")));
     }
@@ -25,7 +25,7 @@ public class BookTest {
     @Test
     public void shouldReturnTitleWhenOnlyTitleIsGiven(){
         Book book = new Book("Book", "", "");
-        String result = book.toString();
+        String result = book.getFormattedDetails();
         assertThat(result, is(String.format("%-40s %-20s %-4s", "Book", "", "")));
     }
 

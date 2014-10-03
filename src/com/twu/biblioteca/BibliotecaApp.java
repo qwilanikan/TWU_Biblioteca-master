@@ -11,16 +11,17 @@ public class BibliotecaApp {
         MessagePrinter printer = new MessagePrinter(System.out);
         printer.printWelcome();
 
-        List<String> books = new ArrayList<String>();
-        books.add("Clean Code");
-        books.add("Agile Samurai");
-        books.add("Joy of Cooking");
+        List<Book> books = new ArrayList<Book>();
+        books.add(new Book("Agile Samurai", "author1","1000"));
+        books.add(new Book("Clean Code", "",""));
+        books.add(new Book("Cookbook", "",""));
+
 
         Library library = new Library(System.out, books);
         library.listBooks();
 
         Book book = new Book("Title","author","year");
-        System.out.println(book.toString());
+        System.out.println(book.getFormattedDetails());
     }
 
 

@@ -17,8 +17,8 @@ public class Book {
 
 
 
-    @Override
-    public String toString() {
+
+    public String getFormattedDetails() {
         return String.format("%-40s %-20s %-4s", title, author, year);
     }
 }
