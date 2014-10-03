@@ -31,8 +31,6 @@ public class LibraryTestDrive {
         when(book1.getFormattedDetails()).thenReturn("aaa");
         book2 = mock(Book.class);
         when(book2.getFormattedDetails()).thenReturn("bbb");
-        book3 = mock(Book.class);
-        when(book3.getFormattedDetails()).thenReturn("ccc");
     }
 
     @Test
@@ -47,14 +45,14 @@ public class LibraryTestDrive {
 
     @Test
     public void shouldListTwoBooksWhenLibraryContainsTwoBooks() {
-        books.add(new Book("Agile Samurai", "",""));
-        books.add(new Book("Clean Code", "",""));
+        books.add(book1);
+        books.add(book2);
         library = new Library(printStream, books);
 
         library.listBooks();
 
-        verify(printStream).println("Agile Samurai");
-        verify(printStream).println("Clean Code");
+        verify(printStream).println("aaa");
+        verify(printStream).println("bbb");
     }
 
     @Test
