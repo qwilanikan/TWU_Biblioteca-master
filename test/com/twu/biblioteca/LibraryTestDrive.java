@@ -55,25 +55,4 @@ public class LibraryTestDrive {
         verify(printStream).println("bbb");
     }
 
-    @Test
-    public void shouldPrintTwoBooksWithDetailsWhenLibraryContainsTwoBooksWithDetails() {
-
-
-        Book book1 = mock(Book.class);
-        when(book1.getFormattedDetails()).thenReturn(String.format("%-40s %-20s %-4s", "Agile Samurai", "someone", "1950"));
-        Book book2 = mock(Book.class);
-        when(book2.getFormattedDetails()).thenReturn(String.format("%-40s %-20s %-4s", "clean code", "somebody", "1999"));
-        List<Book> bookList = new ArrayList<Book>();
-        bookList.add(book1);
-        bookList.add(book2);
-        Library lib = new Library(printStream, bookList);
-
-        lib.listBooks();
-
-        verify(printStream).println(String.format("%-40s %-20s %-4s", "Agile Samurai", "someone", "1950") + "\n"
-                + String.format("%-40s %-20s %-4s", "clean code", "somebody", "1999"));
-
-
-    }
-
 }

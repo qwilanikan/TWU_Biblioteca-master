@@ -20,8 +20,6 @@ public class BibliotecaApp {
         Library library = new Library(System.out, books);
         library.listBooks();
 
-        Book book = new Book("Title","author","year");
-        System.out.println(book.getFormattedDetails());
     }
 
 
