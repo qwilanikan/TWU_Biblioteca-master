@@ -19,6 +19,6 @@ public class Book {
 
 
     public String getFormattedDetails() {
-        return String.format("%-40s %-20s %-4s", title, author, year);
+        return String.format("%-40s%-20s%-4s", title, author, year);
     }
 }

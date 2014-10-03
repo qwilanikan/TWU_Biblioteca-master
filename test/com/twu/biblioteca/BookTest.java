@@ -12,23 +12,14 @@ public class BookTest {
 
     @Before
     public void setUp(){
-        book = new Book("The Cat in the Hat", "Dr. Seuss", "1950");
+        book = new Book("aaaaaaaaaa", "aaaaaaaaaa", "aaaa");
     }
 
     @Test
     public void shouldReturnTitleAuthorYear(){
         String result = book.getFormattedDetails();
 
-        assertThat(result, is("The Cat in the Hat                      Dr. Seuss           1950"));
+        assertThat(result, is("aaaaaaaaaa                              aaaaaaaaaa          aaaa"));
     }
-
-    @Test
-    public void shouldReturnTitleWhenOnlyTitleIsGiven(){
-        Book book = new Book("Book", "", "");
-        String result = book.getFormattedDetails();
-        assertThat(result, is("Book                                                            "));
-    }
-
-
 
 }

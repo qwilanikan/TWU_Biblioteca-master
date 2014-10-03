@@ -7,10 +7,10 @@ import java.nio.Buffer;
 /**
  * Created by danielleerickson on 10/3/14.
  */
-public class MainMenu {
+public class Menu {
     private PrintStream printStream;
     private BufferedReader bufferedReader;
-    public MainMenu(PrintStream printStream, BufferedReader bufferedReader) {
+    public Menu(PrintStream printStream, BufferedReader bufferedReader) {
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
     }
@@ -21,7 +21,7 @@ public class MainMenu {
         printStream.println("1: List Books");
     }
 
-    public int receiveUserOptionChoice() {
+    public int chooseOption() {
         return 1;
     }
 }

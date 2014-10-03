@@ -15,10 +15,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class MainMenuTest {
+public class MenuTest {
 
     private PrintStream printStream;
-    private MainMenu menu;
+    private Menu menu;
     private BufferedReader bufferedReader;
 
     @Before
@@ -26,7 +26,7 @@ public class MainMenuTest {
 
         bufferedReader = mock(BufferedReader.class);
         printStream = mock(PrintStream.class);
-        menu = new MainMenu(printStream, bufferedReader);
+        menu = new Menu(printStream, bufferedReader);
     }
     @Test
     public void shouldDisplayListBooksWhenListBooksIsOnlyOption(){
@@ -41,11 +41,16 @@ public class MainMenuTest {
     public void shouldReturnOneWhenUserEntersOne() throws IOException {
 
         when(bufferedReader.readLine()).thenReturn("1");
-        int choice = menu.receiveUserOptionChoice();
+        int choice = menu.chooseOption();
 
         assertThat(choice, is(1));
-
     }
+
+//    @Test
+//    public void shouldakjsdhflaksjhd(){
+//        menu.selectOption(1);
+//        verify(menu.)
+//    }
 
 
 }

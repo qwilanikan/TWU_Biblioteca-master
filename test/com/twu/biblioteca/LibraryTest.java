@@ -15,13 +15,12 @@ import static org.mockito.Mockito.when;
 /**
  * Created by alisonpolton-simon on 9/30/14.
  */
-public class LibraryTestDrive {
+public class LibraryTest {
     PrintStream printStream;
     Library library;
     List<Book> books;
     private Book book1;
     private Book book2;
-    private Book book3;
 
     @Before
     public void setUp() {
