@@ -19,14 +19,14 @@ public class BookTest {
     public void shouldReturnTitleAuthorYear(){
         String result = book.getFormattedDetails();
 
-        assertThat(result, is(String.format("%-40s %-20s %-4s", "The Cat in the Hat", "Dr. Seuss", "1950")));
+        assertThat(result, is("The Cat in the Hat                      Dr. Seuss           1950"));
     }
 
     @Test
     public void shouldReturnTitleWhenOnlyTitleIsGiven(){
         Book book = new Book("Book", "", "");
         String result = book.getFormattedDetails();
-        assertThat(result, is(String.format("%-40s %-20s %-4s", "Book", "", "")));
+        assertThat(result, is("Book                                                            "));
     }
 
 
