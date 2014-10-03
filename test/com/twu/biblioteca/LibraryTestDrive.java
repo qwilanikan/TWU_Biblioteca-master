@@ -28,13 +28,12 @@ public class LibraryTestDrive {
         printStream = mock(PrintStream.class);
         books = new ArrayList<Book>();
         book1 = mock(Book.class);
-        when(book1.getFormattedDetails()).thenReturn("aaa");
         book2 = mock(Book.class);
-        when(book2.getFormattedDetails()).thenReturn("bbb");
     }
 
     @Test
     public void shouldListOneBookWhenLibraryContainsOneBook() {
+        when(book1.getFormattedDetails()).thenReturn("aaa");
         books.add(book1);
         library = new Library(printStream, books);
 
@@ -46,7 +45,10 @@ public class LibraryTestDrive {
     @Test
     public void shouldListTwoBooksWhenLibraryContainsTwoBooks() {
         books.add(book1);
+        when(book1.getFormattedDetails()).thenReturn("aaa");
         books.add(book2);
+        when(book2.getFormattedDetails()).thenReturn("bbb");
+
         library = new Library(printStream, books);
 
         library.listBooks();
