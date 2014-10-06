@@ -21,7 +21,7 @@ public class Menu {
     public void displayOptions() {
         printStream.println("Main Menu");
         printStream.println("Select an Option");
-        printStream.println("1: List Books \n2: Quit");
+        printStream.println("1: List Books \n2: Checkout Book \n3: Quit");
     }
 
     public void chooseOption() {
