@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Main {
@@ -16,8 +18,13 @@ public class Main {
 
         List<Book> books = books();
         Library library = new Library(printStream, books);
-        ListBooksCommand listBooksCommand = new ListBooksCommand(library);
-        Menu menu = new Menu(printStream, bufferedReader, listBooksCommand, new QuitCommand());
+        QuitCommand quitCommand = new QuitCommand();
+        Map<Integer, Command> commands = new HashMap<Integer, Command>();
+        commands.put(1, new ListBooksCommand(library));
+        commands.put(2, quitCommand);
+
+
+        Menu menu = new Menu(printStream, bufferedReader, commands, quitCommand);
 
         BibliotecaApp bibApp = new BibliotecaApp(messagePrinter, menu, library);
 
@@ -31,4 +38,5 @@ public class Main {
         books.add(new Book("Cookbook", "camp","1234"));
         return books;
     }
+
 }

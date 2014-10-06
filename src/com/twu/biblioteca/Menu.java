@@ -3,17 +3,18 @@ package com.twu.biblioteca;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Map;
 
 public class Menu {
     private PrintStream printStream;
     private BufferedReader bufferedReader;
-    private ListBooksCommand listBooksCommand;
+    private Map<Integer, Command> commands;
     private QuitCommand quitCommand;
 
-    public Menu(PrintStream printStream, BufferedReader bufferedReader, ListBooksCommand listBooksCommand, QuitCommand quitCommand) {
+    public Menu(PrintStream printStream, BufferedReader bufferedReader, Map<Integer, Command> commands, QuitCommand quitCommand) {
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
-        this.listBooksCommand = listBooksCommand;
+        this.commands = commands;
         this.quitCommand = quitCommand;
     }
 
@@ -29,7 +30,7 @@ public class Menu {
             int choice = readChoice();
 
             if(choice == 1 ) {
-                listBooksCommand.execute();
+                commands.get(1).execute();
             }
             else if(choice == 2){
                 quitCommand.execute();

@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-public class QuitCommand {
+public class QuitCommand implements Command {
 
     private boolean shouldContinue = true;
 

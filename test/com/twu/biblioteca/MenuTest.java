@@ -8,6 +8,8 @@ import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.mockito.Mockito.*;
 
@@ -16,53 +18,64 @@ public class MenuTest {
     private PrintStream printStream;
     private Menu menu;
     private BufferedReader bufferedReader;
-    private ListBooksCommand listBooksCommand;
+    private QuitCommand quitCommand;
+    private Map<Integer, Command> commandMap;
+    private Command command;
 
     @Before
     public void setUp() {
 
         bufferedReader = mock(BufferedReader.class);
         printStream = mock(PrintStream.class);
-        listBooksCommand = mock(ListBooksCommand.class);
+        quitCommand = mock(QuitCommand.class);
 
-        menu = new Menu(printStream, bufferedReader, listBooksCommand, new QuitCommand());
+        command = mock(Command.class);
+        commandMap = new HashMap<Integer, Command>();
+        commandMap.put(1,command);
+        commandMap.put(2, quitCommand);
+
+
+        menu = new Menu(printStream, bufferedReader, commandMap, quitCommand);
     }
+
     @Test
     public void shouldDisplayOptions() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("2");
         menu.displayOptions();
-
 
         verify(printStream).println("1: List Books \n2: Quit");
     }
 
     @Test
-    public void shouldListBooksWhenUserEntersOne() throws IOException {
+    public void shouldExecuteCommandWhenUserEntersOneThenQuits() throws IOException {
 
-        when(bufferedReader.readLine()).thenReturn("1","2");
+        when(bufferedReader.readLine()).thenReturn("1");
+        when(quitCommand.shouldContinue()).thenReturn(true, false);
+
         menu.chooseOption();
 
-        verify(listBooksCommand).execute();
+        verify(commandMap.get(1)).execute();
 
     }
 
-    @Test
-    public void shouldListBooksUntilUserQuits() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("1", "1", "2");
-        menu.chooseOption();
 
-        verify(listBooksCommand, times(2)).execute();
-    }
 
 
 
     @Test
     public void shouldNotifyUserWhenInvalidChoiceIsSelected() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("-1000").thenReturn("1").thenReturn("2");
+
+        Map<Integer, Command> map = mock(Map.class);
+        menu = new Menu(printStream, bufferedReader, map, quitCommand);
+
+        when(map.get(anyInt())).thenReturn(command);
+        when(map.containsKey(-1000)).thenReturn(false);
+        when(bufferedReader.readLine()).thenReturn("-1000", "1");
+        when(quitCommand.shouldContinue()).thenReturn(true, true, false);
+
         menu.chooseOption();
 
         verify(printStream).println("Select a valid option!");
-        verify(listBooksCommand).execute();
+        verify(map.get(1)).execute();
     }
 
 
