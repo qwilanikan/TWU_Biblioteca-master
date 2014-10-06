@@ -22,16 +22,27 @@ public class Menu {
     public void displayOptions() {
         printStream.println("Main Menu");
         printStream.println("Select an Option");
-        printStream.println("1: List Books");
+        printStream.println("1: List Books \n2: Quit");
     }
 
     public void chooseOption(){
-        int choice = readChoice();
-        while (choice != 1) {
-            printStream.println("Select a valid option!");
-            choice = readChoice();
+        boolean shouldContinue = true;
+
+        while (shouldContinue ) {
+            int choice = readChoice();
+
+            if(choice == 1 ) {
+                library.listBooks();
+            }
+            else if(choice == 2){
+                shouldContinue = false;
+            }
+            else {
+                printStream.println("Select a valid option!");
+
+            }
+
         }
-        library.listBooks();
     }
 
     private int readChoice() {

@@ -10,9 +10,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.hamcrest.core.Is.is;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class MenuTest {
 
@@ -31,23 +29,36 @@ public class MenuTest {
         menu = new Menu(printStream, bufferedReader, library);
     }
     @Test
-    public void shouldDisplayListBooksWhenListBooksIsOnlyOption(){
+    public void shouldDisplayOptions() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("2");
         menu.displayOptions();
 
-        verify(printStream).println("1: List Books");
+
+        verify(printStream).println("1: List Books \n2: Quit");
     }
 
     @Test
     public void shouldListBooksWhenUserEntersOne() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("1");
+        when(bufferedReader.readLine()).thenReturn("1","2");
         menu.chooseOption();
 
         verify(library).listBooks();
+
     }
 
     @Test
+    public void shouldListBooksUntilUserQuits() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("1", "1", "2");
+        menu.chooseOption();
+
+        verify(library,times(2)).listBooks();
+    }
+
+
+
+    @Test
     public void shouldNotifyUserWhenInvalidChoiceIsSelected() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("-1000").thenReturn("1");
+        when(bufferedReader.readLine()).thenReturn("-1000").thenReturn("1").thenReturn("2");
         menu.chooseOption();
 
         verify(printStream).println("Select a valid option!");
