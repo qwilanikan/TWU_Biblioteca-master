@@ -8,10 +8,10 @@ import java.util.Map;
 public class Menu {
     private PrintStream printStream;
     private BufferedReader bufferedReader;
-    private Map<Integer, Command> commands;
+    private Map<String, Command> commands;
     private QuitCommand quitCommand;
 
-    public Menu(PrintStream printStream, BufferedReader bufferedReader, Map<Integer, Command> commands, QuitCommand quitCommand) {
+    public Menu(PrintStream printStream, BufferedReader bufferedReader, Map<String, Command> commands, QuitCommand quitCommand) {
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
         this.commands = commands;
@@ -27,15 +27,13 @@ public class Menu {
     public void chooseOption(){
 
         while (quitCommand.shouldContinue() ) {
-            int choice = readChoice();
+            String choice = readChoice();
 
-            if(choice == 1 ) {
-                commands.get(1).execute();
-            }
-            else if(choice == 2){
-                quitCommand.execute();
+            if(commands.containsKey(choice)){
+                commands.get(choice).execute();
             }
             else {
+
                 printStream.println("Select a valid option!");
 
             }
@@ -43,10 +41,10 @@ public class Menu {
         }
     }
 
-    private int readChoice() {
-        int choice = 1;
+    private String readChoice() {
+        String choice = "";
         try {
-            choice = Integer.parseInt(bufferedReader.readLine());
+            choice = bufferedReader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }

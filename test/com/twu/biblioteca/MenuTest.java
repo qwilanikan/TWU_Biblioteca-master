@@ -19,7 +19,7 @@ public class MenuTest {
     private Menu menu;
     private BufferedReader bufferedReader;
     private QuitCommand quitCommand;
-    private Map<Integer, Command> commandMap;
+    private Map<String, Command> commandMap;
     private Command command;
 
     @Before
@@ -30,9 +30,9 @@ public class MenuTest {
         quitCommand = mock(QuitCommand.class);
 
         command = mock(Command.class);
-        commandMap = new HashMap<Integer, Command>();
-        commandMap.put(1,command);
-        commandMap.put(2, quitCommand);
+        commandMap = new HashMap<String, Command>();
+        commandMap.put("1",command);
+        commandMap.put("2", quitCommand);
 
 
         menu = new Menu(printStream, bufferedReader, commandMap, quitCommand);
@@ -53,29 +53,22 @@ public class MenuTest {
 
         menu.chooseOption();
 
-        verify(commandMap.get(1)).execute();
+        verify(commandMap.get("1")).execute();
 
     }
-
-
-
-
 
     @Test
     public void shouldNotifyUserWhenInvalidChoiceIsSelected() throws IOException {
 
-        Map<Integer, Command> map = mock(Map.class);
+        Map<String, Command> map = mock(Map.class);
         menu = new Menu(printStream, bufferedReader, map, quitCommand);
 
-        when(map.get(anyInt())).thenReturn(command);
-        when(map.containsKey(-1000)).thenReturn(false);
-        when(bufferedReader.readLine()).thenReturn("-1000", "1");
-        when(quitCommand.shouldContinue()).thenReturn(true, true, false);
+        when(map.containsKey(anyString())).thenReturn(false);
+        when(quitCommand.shouldContinue()).thenReturn(true, false);
 
         menu.chooseOption();
 
         verify(printStream).println("Select a valid option!");
-        verify(map.get(1)).execute();
     }
 
 

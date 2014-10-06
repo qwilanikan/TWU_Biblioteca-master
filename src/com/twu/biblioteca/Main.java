@@ -19,9 +19,9 @@ public class Main {
         List<Book> books = books();
         Library library = new Library(printStream, books);
         QuitCommand quitCommand = new QuitCommand();
-        Map<Integer, Command> commands = new HashMap<Integer, Command>();
-        commands.put(1, new ListBooksCommand(library));
-        commands.put(2, quitCommand);
+        Map<String, Command> commands = new HashMap<String, Command>();
+        commands.put("1", new ListBooksCommand(library));
+        commands.put("2", quitCommand);
 
 
         Menu menu = new Menu(printStream, bufferedReader, commands, quitCommand);
