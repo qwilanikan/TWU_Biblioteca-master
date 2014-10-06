@@ -3,22 +3,18 @@ package com.twu.biblioteca;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.Buffer;
 
-/**
- * Created by danielleerickson on 10/3/14.
- */
 public class Menu {
     private PrintStream printStream;
     private BufferedReader bufferedReader;
-    private Library library;
     private ListBooksCommand listBooksCommand;
+    private QuitCommand quitCommand;
 
-    public Menu(PrintStream printStream, BufferedReader bufferedReader, Library library, ListBooksCommand listBooksCommand) {
+    public Menu(PrintStream printStream, BufferedReader bufferedReader, ListBooksCommand listBooksCommand, QuitCommand quitCommand) {
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
-        this.library = library;
         this.listBooksCommand = listBooksCommand;
+        this.quitCommand = quitCommand;
     }
 
     public void displayOptions() {
@@ -28,16 +24,15 @@ public class Menu {
     }
 
     public void chooseOption(){
-        boolean shouldContinue = true;
 
-        while (shouldContinue ) {
+        while (quitCommand.shouldContinue() ) {
             int choice = readChoice();
 
             if(choice == 1 ) {
                 listBooksCommand.execute();
             }
             else if(choice == 2){
-                shouldContinue = false;
+                quitCommand.execute();
             }
             else {
                 printStream.println("Select a valid option!");

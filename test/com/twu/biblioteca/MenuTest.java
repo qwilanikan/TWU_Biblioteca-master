@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.*;
 
 public class MenuTest {
@@ -17,7 +16,6 @@ public class MenuTest {
     private PrintStream printStream;
     private Menu menu;
     private BufferedReader bufferedReader;
-    private Library library;
     private ListBooksCommand listBooksCommand;
 
     @Before
@@ -25,10 +23,9 @@ public class MenuTest {
 
         bufferedReader = mock(BufferedReader.class);
         printStream = mock(PrintStream.class);
-        library = mock(Library.class);
         listBooksCommand = mock(ListBooksCommand.class);
 
-        menu = new Menu(printStream, bufferedReader, library, listBooksCommand);
+        menu = new Menu(printStream, bufferedReader, listBooksCommand, new QuitCommand());
     }
     @Test
     public void shouldDisplayOptions() throws IOException {
