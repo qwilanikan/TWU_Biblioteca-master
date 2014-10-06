@@ -24,18 +24,15 @@ public class Menu {
         printStream.println("1: List Books \n2: Quit");
     }
 
-    public void chooseOption(){
+    public void chooseOption() {
 
-        while (quitCommand.shouldContinue() ) {
+        while (quitCommand.shouldContinue()) {
             String choice = readChoice();
 
-            if(commands.containsKey(choice)){
+            if (commands.containsKey(choice)) {
                 commands.get(choice).execute();
-            }
-            else {
-
+            } else {
                 printStream.println("Select a valid option!");
-
             }
 
         }

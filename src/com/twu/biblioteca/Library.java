@@ -19,4 +19,8 @@ public class Library {
             printStream.println(book.getFormattedDetails());
         }
     }
+
+    public void checkOut(Book book) {
+        books.remove(book);
+    }
 }
