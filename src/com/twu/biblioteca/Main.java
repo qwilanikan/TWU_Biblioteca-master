@@ -17,7 +17,7 @@ public class Main {
         MessagePrinter messagePrinter = new MessagePrinter(printStream);
 
         List<Book> books = books();
-        Library library = new Library(printStream, books);
+        Library library = new Library(printStream, books, bufferedReader);
         QuitCommand quitCommand = new QuitCommand();
         Map<String, Command> commands = new HashMap<String, Command>();
         commands.put("1", new ListBooksCommand(library));

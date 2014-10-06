@@ -3,6 +3,7 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.BufferedReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +21,11 @@ public class LibraryTest {
     List<Book> books;
     private Book book1;
     private Book book2;
+    private BufferedReader bufferedReader;
 
     @Before
     public void setUp() {
+        bufferedReader = mock(BufferedReader.class);
         printStream = mock(PrintStream.class);
         books = new ArrayList<Book>();
         book1 = mock(Book.class);
@@ -33,7 +36,7 @@ public class LibraryTest {
     public void shouldListOneBookWhenLibraryContainsOneBook() {
         when(book1.getFormattedDetails()).thenReturn("aaa");
         books.add(book1);
-        library = new Library(printStream, books);
+        library = new Library(printStream, books, bufferedReader);
 
         library.listBooks();
 
@@ -47,7 +50,7 @@ public class LibraryTest {
         books.add(book2);
         when(book2.getFormattedDetails()).thenReturn("bbb");
 
-        library = new Library(printStream, books);
+        library = new Library(printStream, books, bufferedReader);
 
         library.listBooks();
 
@@ -58,10 +61,21 @@ public class LibraryTest {
     @Test
     public void shouldRemoveBookFromBookListWhenBookIsCheckedOut(){
         books.add(book1);
-        library = new Library(printStream,books);
-        library.checkOut(book1);
+        library = new Library(printStream,books, bufferedReader);
+        library.checkoutBook(book1);
 
 
         assertThat(books.contains(book1), is(false));
+    }
+
+    @Test
+    public void shouldFindBookToCheckoutWhenGivenTitle(){
+
+        books.add(book1);
+        when(book1.getFormattedDetails()).thenReturn("aaa a");
+        library = new Library(printStream, books, bufferedReader);
+
+        Book returnBook = library.getBookToCheckOut("aaa");
+        assertThat(returnBook, is(book1));
     }
 }
