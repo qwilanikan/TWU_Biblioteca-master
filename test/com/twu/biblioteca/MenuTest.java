@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -20,13 +19,16 @@ public class MenuTest {
     private PrintStream printStream;
     private Menu menu;
     private BufferedReader bufferedReader;
+    private Library library;
 
     @Before
     public void setUp() {
 
         bufferedReader = mock(BufferedReader.class);
         printStream = mock(PrintStream.class);
-        menu = new Menu(printStream, bufferedReader);
+        library = mock(Library.class);
+
+        menu = new Menu(printStream, bufferedReader, library);
     }
     @Test
     public void shouldDisplayListBooksWhenListBooksIsOnlyOption(){
@@ -38,19 +40,15 @@ public class MenuTest {
     }
 
     @Test
-    public void shouldReturnOneWhenUserEntersOne() throws IOException {
+    public void shouldListBooksWhenUserEntersOne() throws IOException {
 
         when(bufferedReader.readLine()).thenReturn("1");
-        int choice = menu.chooseOption();
+        menu.chooseOption();
 
-        assertThat(choice, is(1));
+        verify(library).listBooks();
     }
 
-//    @Test
-//    public void shouldakjsdhflaksjhd(){
-//        menu.selectOption(1);
-//        verify(menu.)
-//    }
+
 
 
 }

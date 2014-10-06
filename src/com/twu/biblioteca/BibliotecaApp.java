@@ -9,22 +9,22 @@ import java.util.List;
 public class BibliotecaApp {
 
 
-    private BufferedReader bufferedReader;
+    private MessagePrinter messagePrinter;
+    private Menu menu;
+    private Library library;
 
-    public void run(BufferedReader bufferedReader) {
-        MessagePrinter printer = new MessagePrinter(System.out);
-        printer.printWelcome();
+    public BibliotecaApp(MessagePrinter messagePrinter, Menu menu, Library library) {
+        this.messagePrinter = messagePrinter;
+        this.menu = menu;
+        this.library = library;
+    }
 
-        Menu menu = new Menu(System.out, this.bufferedReader);
+    public void run() {
+        messagePrinter.printWelcome();
+
         menu.displayOptions();
 
-        List<Book> books = new ArrayList<Book>();
-        books.add(new Book("Agile Samurai", "author1","1000"));
-        books.add(new Book("Clean Code", "",""));
-        books.add(new Book("Cookbook", "",""));
-
-        Library library = new Library(System.out, books);
-        library.listBooks();
+        menu.chooseOption();
 
     }
 
