@@ -12,11 +12,13 @@ public class Menu {
     private PrintStream printStream;
     private BufferedReader bufferedReader;
     private Library library;
+    private ListBooksCommand listBooksCommand;
 
-    public Menu(PrintStream printStream, BufferedReader bufferedReader, Library library) {
+    public Menu(PrintStream printStream, BufferedReader bufferedReader, Library library, ListBooksCommand listBooksCommand) {
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
         this.library = library;
+        this.listBooksCommand = listBooksCommand;
     }
 
     public void displayOptions() {
@@ -32,7 +34,7 @@ public class Menu {
             int choice = readChoice();
 
             if(choice == 1 ) {
-                library.listBooks();
+                listBooksCommand.execute();
             }
             else if(choice == 2){
                 shouldContinue = false;

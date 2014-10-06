@@ -15,10 +15,9 @@ public class Main {
         MessagePrinter messagePrinter = new MessagePrinter(printStream);
 
         List<Book> books = books();
-
         Library library = new Library(printStream, books);
-
-        Menu menu = new Menu(printStream, bufferedReader, library);
+        ListBooksCommand listBooksCommand = new ListBooksCommand(library);
+        Menu menu = new Menu(printStream, bufferedReader, library, listBooksCommand);
 
         BibliotecaApp bibApp = new BibliotecaApp(messagePrinter, menu, library);
 

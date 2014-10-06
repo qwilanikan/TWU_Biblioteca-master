@@ -18,6 +18,7 @@ public class MenuTest {
     private Menu menu;
     private BufferedReader bufferedReader;
     private Library library;
+    private ListBooksCommand listBooksCommand;
 
     @Before
     public void setUp() {
@@ -25,8 +26,9 @@ public class MenuTest {
         bufferedReader = mock(BufferedReader.class);
         printStream = mock(PrintStream.class);
         library = mock(Library.class);
+        listBooksCommand = mock(ListBooksCommand.class);
 
-        menu = new Menu(printStream, bufferedReader, library);
+        menu = new Menu(printStream, bufferedReader, library, listBooksCommand);
     }
     @Test
     public void shouldDisplayOptions() throws IOException {
@@ -39,10 +41,11 @@ public class MenuTest {
 
     @Test
     public void shouldListBooksWhenUserEntersOne() throws IOException {
+
         when(bufferedReader.readLine()).thenReturn("1","2");
         menu.chooseOption();
 
-        verify(library).listBooks();
+        verify(listBooksCommand).execute();
 
     }
 
@@ -51,7 +54,7 @@ public class MenuTest {
         when(bufferedReader.readLine()).thenReturn("1", "1", "2");
         menu.chooseOption();
 
-        verify(library,times(2)).listBooks();
+        verify(listBooksCommand, times(2)).execute();
     }
 
 
@@ -62,7 +65,7 @@ public class MenuTest {
         menu.chooseOption();
 
         verify(printStream).println("Select a valid option!");
-        verify(library).listBooks();
+        verify(listBooksCommand).execute();
     }
 
 
