@@ -27,9 +27,11 @@ public class Menu {
 
     public void chooseOption(){
         int choice = readChoice();
-        if(choice == 1) {
-            library.listBooks();
+        while (choice != 1) {
+            printStream.println("Select a valid option!");
+            choice = readChoice();
         }
+        library.listBooks();
     }
 
     private int readChoice() {

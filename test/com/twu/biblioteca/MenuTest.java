@@ -32,23 +32,27 @@ public class MenuTest {
     }
     @Test
     public void shouldDisplayListBooksWhenListBooksIsOnlyOption(){
-
         menu.displayOptions();
 
         verify(printStream).println("1: List Books");
-
     }
 
     @Test
     public void shouldListBooksWhenUserEntersOne() throws IOException {
-
         when(bufferedReader.readLine()).thenReturn("1");
         menu.chooseOption();
 
         verify(library).listBooks();
     }
 
+    @Test
+    public void shouldNotifyUserWhenInvalidChoiceIsSelected() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("-1000").thenReturn("1");
+        menu.chooseOption();
 
+        verify(printStream).println("Select a valid option!");
+        verify(library).listBooks();
+    }
 
 
 }
