@@ -4,13 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -69,13 +69,27 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldFindBookToCheckoutWhenGivenTitle(){
+    public void shouldFindBookToCheckoutWhenGivenTitle() throws IOException {
 
         books.add(book1);
+        when(bufferedReader.readLine()).thenReturn("aaa");
         when(book1.getFormattedDetails()).thenReturn("aaa a");
         library = new Library(printStream, books, bufferedReader);
 
-        Book returnBook = library.getBookToCheckOut("aaa");
+        Book returnBook = library.getBookToCheckOut();
         assertThat(returnBook, is(book1));
     }
+
+    @Test
+    public void shouldPrintThankYouWhenSuccessfulCheckout() throws IOException {
+        books.add(book1);
+
+        library = new Library(printStream, books, bufferedReader);
+        library.checkoutBook(book1);
+
+        verify(printStream).println("Thank you! Enjoy your book.");
+
+    }
+
+
 }

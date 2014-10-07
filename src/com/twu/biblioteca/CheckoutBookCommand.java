@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+
 public class CheckoutBookCommand implements Command{
 
     private Library library;
@@ -11,6 +12,6 @@ public class CheckoutBookCommand implements Command{
 
     @Override
     public void execute() {
-        library.checkoutBook(library.getBookToCheckOut("aaa"));
+        library.checkoutBook(library.getBookToCheckOut());
     }
 }

@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.List;
 
@@ -24,10 +25,15 @@ public class Library {
     }
 
     public void checkoutBook(Book book) {
+        printStream.println("Thank you! Enjoy your book.");
         books.remove(book);
     }
 
-    public Book getBookToCheckOut(String title) {
+    public Book getBookToCheckOut() {
+
+        printStream.println("What is the title of the book you would like to checkout? ");
+        String title = getInputFromUser();
+
         for (Book book : books) {
             String details = book.getFormattedDetails();
             if (details.contains(title)){
@@ -38,4 +44,16 @@ public class Library {
 
         return null;
     }
+
+    private String getInputFromUser() {
+        String title = null;
+        try {
+            title = bufferedReader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return title;
+    }
+
+
 }

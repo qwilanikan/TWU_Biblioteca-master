@@ -1,10 +1,6 @@
 package com.twu.biblioteca;
 
 
-import java.io.BufferedReader;
-import java.util.ArrayList;
-
-import java.util.List;
 
 public class BibliotecaApp {
 
@@ -19,7 +15,7 @@ public class BibliotecaApp {
         this.library = library;
     }
 
-    public void run() {
+    public void run(){
         messagePrinter.printWelcome();
 
         menu.displayOptions();
